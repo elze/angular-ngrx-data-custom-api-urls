@@ -59,14 +59,16 @@ export class SkillsComponent implements OnInit {
       this.treeFlattener
     );
     console.log(`SkillsComponent.constructor(): instantiated this.dataSource`);
+
     this.skillsService.entities$.subscribe(data => {
-    //this.skillsStore.pipe(select(selectSkills)).subscribe(data => {
       this.dataSource.data = data;
       console.log(`SkillsComponent.subscribe(): data = ${data}`);
     });
+
   }
 
   ngOnInit() {
+    this.skillsService.getAll();
     //this.skillsStore.dispatch(getSkillsApi());
   }
 
