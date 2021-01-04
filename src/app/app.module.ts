@@ -19,6 +19,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { StoreModule } from "@ngrx/store";
 import { SkillsComponent } from "./skills/skills.component";
 import { SkillsService } from './skills/skills.service';
+import { SkillsDataService } from './skills/skills-data.service';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'https://sc2019.skillclusters.com/sc/',
@@ -41,7 +42,8 @@ export const entityConfig = {
   bootstrap: [AppComponent],
   providers: [
     {provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig},
-    SkillsService
+    SkillsService,
+    SkillsDataService
     ]
 })
 export class AppModule {}

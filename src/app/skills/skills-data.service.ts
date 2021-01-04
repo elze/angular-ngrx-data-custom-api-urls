@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import { DefaultDataService, DefaultDataServiceConfig, DefaultHttpUrlGenerator, DefaultPluralizer } from "@ngrx/data";
 import { HttpClient } from '@angular/common/http';
 import { StructSkill } from "./models/struct-skill";
 
+@Injectable()
 export class SkillsDataService extends DefaultDataService<StructSkill> {
   private defaultDataServiceConfig: DefaultDataServiceConfig;
   constructor(http: HttpClient, 
