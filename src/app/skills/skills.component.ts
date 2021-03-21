@@ -1,45 +1,39 @@
 import { Component, OnInit } from "@angular/core";
-import { Store, select } from "@ngrx/store";
+
+//import { Store, select } from "@ngrx/store";
 import { FlatTreeControl } from "@angular/cdk/tree";
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener
 } from "@angular/material/tree";
 
-import { /* SkillNode,*/ SkillFlatNode } from "./models/skill-node";
-import { StructSkill } from "./models/struct-skill"
+import { StructSkill, SkillFlatNode } from "./models/struct-skill";
 import { SkillsService } from "./skills.service";
-//import {getSkillsApi} from './skills-actions';
-//import {AppState, selectSkills} from '../reducers/index';
 
 @Component({
   selector: "app-skills",
   templateUrl: "./skills.component.html",
-  styleUrls: ["./skills.component.css"]
+  styleUrls: ["./skills.component.scss"]
 })
 export class SkillsComponent implements OnInit {
-  //levels = new Map<SkillNode, number>();
   levels = new Map<StructSkill, number>();
   treeControl: FlatTreeControl<SkillFlatNode>;
-  //treeFlattener: MatTreeFlattener<SkillNode, SkillFlatNode>;
   treeFlattener: MatTreeFlattener<StructSkill, SkillFlatNode>;
 
-  //private transformer = (node: SkillNode, level: number) => {
   private transformer = (node: StructSkill, level: number) => {
     return new SkillFlatNode(
-      !!node.children && node.children.length > 0,
+      !!node.successors && node.successors.length > 0,
       node.item,
       node.fontSize,
       node.percentOfTime,
+      node.kind,
       level
     );
   };
 
-  //dataSource: MatTreeFlatDataSource<SkillNode, SkillFlatNode>;
   dataSource: MatTreeFlatDataSource<StructSkill, SkillFlatNode>;
 
-  constructor(//private skillsStore: Store<AppState,
-  private skillsService: SkillsService) {
+  constructor(private skillsService: SkillsService) {
     this.treeControl = new FlatTreeControl<SkillFlatNode>(
       node => node.level,
       node => node.expandable
@@ -49,7 +43,7 @@ export class SkillsComponent implements OnInit {
       this.transformer,
       node => node.level,
       node => node.expandable,
-      node => node.children
+      node => node.successors
     );
     console.log(
       `SkillsComponent.constructor(): instantiated this.treeFlattener`
@@ -64,24 +58,11 @@ export class SkillsComponent implements OnInit {
       this.dataSource.data = data;
       console.log(`SkillsComponent.subscribe(): data = ${data}`);
     });
-
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.skillsService.getAll();
-    //this.skillsStore.dispatch(getSkillsApi());
   }
-
-  // This method is not necessary yet at this point
-  //getChildren = (node: SkillNode) => {
-  getChildren = (node: StructSkill) => {
-    console.log(
-      `SkillsComponent.getChildren(): node.item = ${
-        node.item
-      } node.children = ${node.children}`
-    );
-    return node.children;
-  };
 
   hasChild = (index: number, node: SkillFlatNode): boolean => {
     console.log(

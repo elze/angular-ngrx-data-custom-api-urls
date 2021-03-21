@@ -1,37 +1,27 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <mat-tree-node
-    *matTreeNodeDef="let node"
-    matTreeNodeToggle
-    matTreeNodePadding
-    [class.node-inline]="!node.expandable"
-  >
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [class.node-inline]="!node.expandable">
     <li class="mat-tree-node">
       <button mat-icon-button disabled></button>
       <button
-        mat-stroked-button
-        class="button-with-margin"
-        color="primary"
-        [ngStyle]="{ 'font-size.px': node.fontSize}"
-      >
-        {{node.name}}<br />{{node.percentOfTime}}
-      </button>
+          mat-stroked-button
+          class="button-with-margin"
+          [ngStyle]="{ 'font-size.px': node.fontSize}"
+        >
+          {{node.name}}<br />{{node.percentOfTime}}
+        </button>
     </li>
   </mat-tree-node>
 
-  <mat-tree-node
-    *matTreeNodeDef="let node;when: hasChild"
-    matTreeNodePadding
-    [class.node-normal]="node.expandable"
-  >
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding [class.node-normal]="node.expandable">
     <button
-      mat-icon-button
-      matTreeNodeToggle
-      [attr.aria-label]="'toggle ' + node.name"
-    >
-      <mat-icon class="mat-icon-rtl-mirror" color="accent">
-        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-      </mat-icon>
-    </button>
-    {{node.name}}
+        mat-icon-button
+        matTreeNodeToggle
+        [attr.aria-label]="'toggle ' + node.name"
+      >
+        <mat-icon class="mat-icon-rtl-mirror" color="accent">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+    <button [ngStyle]="{'background-color': node.kind === 'SkillCategory'? 'linen': 'LightCyan', 'height': '40px'}">{{node.name}}</button>
   </mat-tree-node>
 </mat-tree>
