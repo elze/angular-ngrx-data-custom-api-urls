@@ -7,6 +7,7 @@ import { EffectsModule } from "@ngrx/effects";
 
 import { HttpClientModule } from "@angular/common/http";
 
+import { MatCardModule } from "@angular/material/card";
 import { MatTreeModule } from "@angular/material/tree";
 
 import { MatButtonModule } from "@angular/material/button";
@@ -38,6 +39,7 @@ export const entityConfig = {
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatTreeModule,
     AppRoutingModule,
