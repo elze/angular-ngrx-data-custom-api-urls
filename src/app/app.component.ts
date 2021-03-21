@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  name = "SC 2020 Angular 10 with ngrx-data and Material Tree";
+  name = "SC 2020 Angular 10 with ngrx-data and Angular Material Tree";
 }
