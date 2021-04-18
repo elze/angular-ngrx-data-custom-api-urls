@@ -6,6 +6,8 @@ import {
   MatTreeFlattener
 } from "@angular/material/tree";
 
+import { MatomoTracker } from 'ngx-matomo';
+
 import { StructSkill, SkillFlatNode } from "./models/struct-skill";
 import { SkillsService } from "./skills.service";
 
@@ -24,6 +26,7 @@ export class SkillsComponent implements OnInit {
       !!node.successors && node.successors.length > 0,
       node.item,
       node.fontSize,
+      node.id,
       node.percentOfTime,
       node.kind,
       level
@@ -32,7 +35,8 @@ export class SkillsComponent implements OnInit {
 
   dataSource: MatTreeFlatDataSource<StructSkill, SkillFlatNode>;
 
-  constructor(private skillsService: SkillsService) {
+  constructor(private skillsService: SkillsService,
+    private matomoTracker: MatomoTracker) {
     this.treeControl = new FlatTreeControl<SkillFlatNode>(
       node => node.level,
       node => node.expandable
@@ -60,13 +64,20 @@ export class SkillsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.matomoTracker.setDocumentTitle('ngx-Matomo SkillsComponent');
     this.skillsService.getAll();
   }
 
   hasChild = (index: number, node: SkillFlatNode): boolean => {
+    /*
     console.log(
       `hasChild: node.name = ${node.name} node.expandable = ${node.expandable}`
     );
+    */
     return node.expandable;
   };
+
+  trackNodeExpandCollapse(node: SkillFlatNode): void {
+    this.matomoTracker.trackEvent('Node expanded or collapsed', `Node with itemId ${node.itemId} is expanded? ${this.treeControl.isExpanded(node)}`, node.name, node.level);
+  }  
 }

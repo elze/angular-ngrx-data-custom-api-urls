@@ -16,7 +16,7 @@
     <button
         mat-icon-button
         matTreeNodeToggle
-        [attr.aria-label]="'toggle ' + node.name"
+        [attr.aria-label]="'toggle ' + node.name" (click)="trackNodeExpandCollapse(node)"
       >
         <mat-icon class="mat-icon-rtl-mirror" color="accent">
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
