@@ -15,6 +15,8 @@ import { MatIconModule } from "@angular/material/icon";
 
 import { StoreModule } from "@ngrx/store";
 
+import { MatomoModule } from 'ngx-matomo';
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -46,7 +48,8 @@ export const entityConfig = {
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
     EntityStoreModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    MatomoModule
   ],
   declarations: [AppComponent, SkillsComponent],
   bootstrap: [AppComponent],
