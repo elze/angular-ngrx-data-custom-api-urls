@@ -15,7 +15,7 @@ import { MatIconModule } from "@angular/material/icon";
 
 import { StoreModule } from "@ngrx/store";
 
-import { MatomoModule } from 'ngx-matomo';
+import { MatomoModule } from "ngx-matomo";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";

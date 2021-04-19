@@ -1,5 +1,3 @@
-//import {BehaviorSubject} from 'rxjs';
-
 export class StructSkill {
   /** Will be used in the future */
   static DefaultFontSize = "12px";
